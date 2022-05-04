@@ -37,13 +37,13 @@
   <section id="subroutines">
 <h1>Subroutines<a class="headerlink" href="#subroutines" title="Permalink to this headline">¶</a></h1>
 <p>Subroutines are declared using the statement <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">name(parameters)</span> <span class="pre">-&gt;</span> <span class="pre">output_type</span> <span class="pre">{</span> <span class="pre">body</span> <span class="pre">}</span></code>.
-Zero or more quantum bits
-and classical values are passed to the subroutine by reference or name in <code class="docutils literal notranslate"><span class="pre">qargs</span></code>.
-Classical types are passed by value in <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.
+The subroutine will define zero or more parameters as input, consisting of both quantum and classical arguments.
+Quantum bits and registers are passed in by reference or name, while classical types are passed in by value.
+All arguments are declared together with their type,
+for example <code class="docutils literal notranslate"><span class="pre">qubit</span> <span class="pre">ancilla</span></code> would define a quantum bit argument named <code class="docutils literal notranslate"><span class="pre">ancilla</span></code>.
 The subroutines return up to one value of classical type, signified by the
 <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword. If there is no return type, the empty <code class="docutils literal notranslate"><span class="pre">return</span></code>
-keyword may be used to immediately exit from the subroutine. All arguments are declared together
-with their type, for example <code class="docutils literal notranslate"><span class="pre">qubit</span> <span class="pre">ancilla</span></code> would define a quantum bit argument named <code class="docutils literal notranslate"><span class="pre">ancilla</span></code>.
+keyword may be used to immediately exit from the subroutine.
 Qubit declarations are not allowed within subroutines as they are global. A subroutine
 is invoked with the syntax <code class="docutils literal notranslate"><span class="pre">name(parameters)</span></code> and may be assigned to an <code class="docutils literal notranslate"><span class="pre">output</span></code> as
 needed via an assignment operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">+=</span></code>, etc).</p>
@@ -193,6 +193,7 @@ subscripted, meaning that <code class="docutils literal notranslate"><span class
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../grammar/index.html">OpenQasm 3.0 Grammar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
 </ul>
 
 <div class="relations">
@@ -232,7 +233,7 @@ subscripted, meaning that <code class="docutils literal notranslate"><span class
       &copy;2017-2020, Andrew W. Cross, Lev S. Bishop, John A. Smolin, Jay M. Gambetta.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
