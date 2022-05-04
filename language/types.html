@@ -143,8 +143,12 @@ bit is on the right.</p>
 <h3>Integers<a class="headerlink" href="#integers" title="Permalink to this headline">¶</a></h3>
 <p>There are n-bit signed and unsigned integers. The statements <code class="docutils literal notranslate"><span class="pre">int[size]</span> <span class="pre">name;</span></code> and <code class="docutils literal notranslate"><span class="pre">uint[size]</span> <span class="pre">name;</span></code> declare
 signed 1:n-1:0 and unsigned 0:n:0 integers of the given size. The sizes
-are always explicitly part of the type; there is no implicit width for
-classical types in OpenQASM. Because register indices are integers, they
+and the surrounding brackets can be omitted (<em>e.g.</em> <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">name;</span></code>) to use
+a precision that is specified by the particular target architecture.
+Bit-level operations cannot be used on types without a specified width, and
+unspecified-width types are different to <em>all</em> specified-width types for
+the purposes of casting.
+Because register indices are integers, they
 can be cast from classical registers containing measurement outcomes and
 may only be known at run time. An n-bit classical register containing
 bits can also be reinterpreted as an integer, and these types can be
@@ -157,6 +161,8 @@ one another.</p>
 <span class="c1">// Declare a 16 bit signed integer</span>
 <span class="kt">int</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="w"> </span><span class="n">my_int</span><span class="p">;</span><span class="w"></span>
 <span class="n">my_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">16</span><span class="p">](</span><span class="n">my_uint</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// Declare a machine-sized integer</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">my_machine_int</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -165,8 +171,14 @@ one another.</p>
 <p>IEEE 754 floating point registers may be declared with <code class="docutils literal notranslate"><span class="pre">float[size]</span> <span class="pre">name;</span></code>, where <code class="docutils literal notranslate"><span class="pre">float[64]</span></code> would
 indicate a standard double-precision float. Note that some hardware
 vendors may not support manipulating these values at run-time.</p>
+<p>Similar to integers, floating-point registers can be declared with an
+unspecified size.  The resulting precision is then set by the particular target
+architecture, and the unspecified-width type is different to all specified-width
+types for the purposes of casting.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Declare a single-precision 32-bit float</span>
 <span class="kt">float</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="n">my_float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">π</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// Declare a machine-precision float.</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">my_machine_float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.3</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -175,8 +187,12 @@ vendors may not support manipulating these values at run-time.</p>
 <p>Fixed-point angles are interpreted as 2π times a 0:0:n
 fixed-point number. This represents angles in the interval
 <span class="math notranslate nohighlight">\([0,2\pi)\)</span> up to an error <span class="math notranslate nohighlight">\(\epsilon\leq \pi/2^{n-1}\)</span> modulo
-2π. The statement <code class="docutils literal notranslate"><span class="pre">angle[size]</span> <span class="pre">name;</span></code> declares an n-bit angle. OpenQASM3
-introduces this specialized type because of the ubiquity of this angle
+2π. The statement <code class="docutils literal notranslate"><span class="pre">angle[size]</span> <span class="pre">name;</span></code> declares an n-bit angle, and
+<code class="docutils literal notranslate"><span class="pre">angle</span> <span class="pre">name;</span></code> declares an angle with machine-architecture-specified width.
+In cases where the width is not specified, bit-level operations are forbidden,
+and the type is different from all other sized angle types for the purposes of
+casting, similar to the rules for integers.
+OpenQASM3 introduces this specialized type because of the ubiquity of this angle
 representation in phase estimation circuits and numerically controlled
 oscillators found in hardware platform. Note that defining gate
 parameters with <code class="docutils literal notranslate"><span class="pre">angle</span></code> types may be necessary for those parameters to be
@@ -186,13 +202,15 @@ compatible with run-time values on some platforms.</p>
 <span class="kt">float</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="n">float_pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">π</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// equivalent to pi_by_2 up to rounding errors</span>
 <span class="n">angle</span><span class="p">[</span><span class="mi">20</span><span class="p">](</span><span class="n">float_pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// Declare a machine-sized angle</span>
+<span class="n">angle</span><span class="w"> </span><span class="n">my_machine_angle</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="complex-numbers">
 <h3>Complex numbers<a class="headerlink" href="#complex-numbers" title="Permalink to this headline">¶</a></h3>
-<p>Complex numbers may be declared as <code class="docutils literal notranslate"><span class="pre">complex[type[size]]</span> <span class="pre">name</span></code>, for a numeric OpenQASM classical type
-<code class="docutils literal notranslate"><span class="pre">type</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">angle</span></code>) and a number of bits <code class="docutils literal notranslate"><span class="pre">size</span></code>. The real
+<p>Complex numbers may be declared as <code class="docutils literal notranslate"><span class="pre">complex[type]</span> <span class="pre">name</span></code>, for a numeric OpenQASM classical type
+<code class="docutils literal notranslate"><span class="pre">type</span></code> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">angle</span></code> plus their optional size). The real
 and imaginary parts of the complex number are <code class="docutils literal notranslate"><span class="pre">type[size]</span></code> types. For instance, <code class="docutils literal notranslate"><span class="pre">complex[float[32]]</span> <span class="pre">c</span></code>
 would declare a complex number with real and imaginary parts that are 32-bit floating point numbers. The
 <code class="docutils literal notranslate"><span class="pre">im</span></code> keyword defines the imaginary number <span class="math notranslate nohighlight">\(sqrt(-1)\)</span>. <code class="docutils literal notranslate"><span class="pre">complex[type[size]]</span></code> types are initalized as
@@ -202,6 +220,7 @@ left of <code class="docutils literal notranslate"><span class="pre">im</span></
 c = 2.5 + 3.5im; // 2.5, 3.5 are resolved to be ``float[64]`` types
 complex[float[64]] d = 2.0+sin(π) + 3.1*5.5 im;
 complex[int[32]] f = 2 + 5 im; // 2, 5 are resolved to be ``int[32]`` types
+complex[float] my_machine_complex;
 </pre></div>
 </div>
 </section>
