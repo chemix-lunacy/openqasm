@@ -429,6 +429,57 @@ the principal value is returned.</p></td>
 </div>
 </section>
 </section>
+<section id="literals">
+<h2>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h2>
+<p>There are five types of literals in OpenQASM 3, integer, float, boolean,
+bit string, and timing.</p>
+<p>Integer literals can be written in decimal without a prefix, or as a hex, octal, or
+binary number, as denoted by a leading <code class="docutils literal notranslate"><span class="pre">0x/0X</span></code>, <code class="docutils literal notranslate"><span class="pre">0o</span></code>, or <code class="docutils literal notranslate"><span class="pre">0b/0B</span></code> prefix.
+Non-consecutive underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> may be inserted between the first and last
+digit of the literal to improve readability for large values.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// decimal</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xff</span><span class="p">;</span><span class="w"> </span><span class="c1">// hex</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffff</span><span class="n">_ffff</span><span class="w"> </span><span class="c1">// hex with _ for readability</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0XBEEF</span><span class="p">;</span><span class="w"> </span><span class="c1">// uppercase HEX</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">o73</span><span class="p">;</span><span class="w"> </span><span class="c1">// octal</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0b1101</span><span class="p">;</span><span class="w"> </span><span class="c1">// binary</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">0B0110</span><span class="n">_1001</span><span class="p">;</span><span class="w"> </span><span class="c1">// uppercase B binary with _ for readability</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">_000_000</span><span class="w"> </span><span class="c1">// 1 million with _ for readability</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Float literals contain either</dt><dd><ul class="simple">
+<li><p>one or more digits followed by a <code class="docutils literal notranslate"><span class="pre">.</span></code> and zero or more digits,</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">.</span></code> followed by one or more digits.</p></li>
+</ul>
+</dd>
+</dl>
+<p>In addition, scientific notation can be used with a signed or unsigned integer
+exponent.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.1</span><span class="p">;</span><span class="w"> </span><span class="c1">// leading dot</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span><span class="w"> </span><span class="c1">// trailing dot</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2e10</span><span class="p">;</span><span class="w"> </span><span class="c1">// scientific</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2e+1</span><span class="p">;</span><span class="w"> </span><span class="c1">// scientific with positive signed exponent</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">f6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0E-1</span><span class="p">;</span><span class="w"> </span><span class="c1">// uppercase scientific with signed exponent</span>
+</pre></div>
+</div>
+<p>The two boolean literals are the lowercase strings <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>Bit string literals are denoted by double quotes <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> surrounding a number of
+zero and one digits, and may include non-consecutive underscores to improve
+readability for large strings.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">bit</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;00010001&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">bit</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0001_0001&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// underscore for readability</span>
+</pre></div>
+</div>
+<p>Timing literals are float or integer literals with a unit of time.
+<code class="docutils literal notranslate"><span class="pre">ns,</span> <span class="pre">μs,</span> <span class="pre">us,</span> <span class="pre">ms,</span> <span class="pre">and</span> <span class="pre">s</span></code> are used for SI time units. <code class="docutils literal notranslate"><span class="pre">dt</span></code> is a
+backend-dependent unit equivalent to one waveform sample.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span><span class="w"> </span><span class="n">one_second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="n">ms</span><span class="p">;</span><span class="w"></span>
+<span class="n">duration</span><span class="w"> </span><span class="n">thousand_cycles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="n">dt</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 <section id="arrays">
 <h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
 <p>Statically-sized arrays of values can be created and initialized, and individual elements
@@ -483,12 +534,12 @@ the shape and type of the assigned value must match that of the reference.</p>
 <section id="duration">
 <h3>Duration<a class="headerlink" href="#duration" title="Permalink to this headline">¶</a></h3>
 <p>We introduce a <code class="docutils literal notranslate"><span class="pre">duration</span></code> type to express timing.
-Durations are numbers with a unit of time. <code class="docutils literal notranslate"><span class="pre">ns,</span> <span class="pre">μs,</span> <span class="pre">us,</span> <span class="pre">ms,</span> <span class="pre">and</span> <span class="pre">s</span></code> are used for SI time
-units. <code class="docutils literal notranslate"><span class="pre">dt</span></code> is a backend-dependent unit equivalent to one waveform sample.
+Durations can be assigned with expressions including timing literals.
 <code class="docutils literal notranslate"><span class="pre">durationof()</span></code> is an intrinsic function used to reference the
 duration of a calibrated gate.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">duration</span><span class="w"> </span><span class="n">one_second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="n">ms</span><span class="p">;</span><span class="w"></span>
 <span class="n">duration</span><span class="w"> </span><span class="n">thousand_cycles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="n">dt</span><span class="p">;</span><span class="w"></span>
+<span class="n">duration</span><span class="w"> </span><span class="n">two_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one_second</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="n">s</span><span class="p">;</span><span class="w"></span>
 <span class="n">duration</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">durationof</span><span class="p">({</span><span class="n">x</span><span class="w"> </span><span class="n">$3</span><span class="p">;});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -654,7 +705,21 @@ the slices must match.</p>
 <span id="castingspecifics"></span><h2>Casting specifics<a class="headerlink" href="#casting-specifics" title="Permalink to this headline">¶</a></h2>
 <p>The classical types are divided into the ‘standard’ classical types (bool, int,
 uint, and float) that exist in languages like C, and the ‘special’ classical
-types (bit, angle, duration, and stretch) that do not.</p>
+types (bit, angle, duration, and stretch) that do not.
+The standard types follow rules that mimic those of C99 for <a class="reference external" href="https://en.cppreference.com/w/c/language/conversion">promotion and
+conversion</a> in mixed
+expressions and assignments. Like the C99 specification, all float values have
+higher rank than all integer types, and higher-precision types have higher rank
+than the same type with a lower precision (see <a class="reference external" href="https://en.cppreference.com/w/c/language/conversion#Usual_arithmetic_conversions">usual arithmetic conversions</a>,
+<a class="reference external" href="https://en.cppreference.com/w/c/language/conversion#Integer_promotions">integer promotions</a>, and
+<a class="reference external" href="https://en.cppreference.com/w/c/language/conversion#Integer_conversions">integer conversions</a>).
+Standard and special classical types
+may only mix in expressions with operators defined for those mixed types,
+otherwise explicit casts must be provided, unless otherwise noted (such as for
+assigning float values or expressions to angles).
+Additionally, angle values will be implicitly promoted or converted in the same manner as
+unsigned integers when mixed with or assigned to angle values with differing
+precision.</p>
 <p>In general, for any cast between standard types that results in loss of
 precision, if the source value is larger than can be represented in the target
 type, the exact behavior is implementation specific and must be documented by
@@ -873,6 +938,7 @@ dividing a duration by a duration produces a machine-precision <code class="docu
 <li class="toctree-l3"><a class="reference internal" href="#generalities">Generalities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quantum-types">Quantum types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classical-types">Classical types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#literals">Literals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#types-related-to-timing">Types related to timing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#aliasing">Aliasing</a></li>
