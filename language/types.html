@@ -37,15 +37,19 @@
             
   <section id="types-and-casting">
 <h1>Types and Casting<a class="headerlink" href="#types-and-casting" title="Permalink to this headline">¶</a></h1>
-<section id="generalities">
-<h2>Generalities<a class="headerlink" href="#generalities" title="Permalink to this headline">¶</a></h2>
-<p>Variable identifiers must begin with a letter [A-Za-z], an underscore or an element from the Unicode character categories
-Lu/Ll/Lt/Lm/Lo/Nl <span id="id1">[<a class="reference internal" href="../index.html#id51" title="Unicode Character Categories. URL: http://www.fileformat.info/info/unicode/category/index.htm (visited on 2020-10-23).">noa</a>]</span>. The set of permissible
-continuation characters consists of all members of the aforementioned character
-sets with the addition of decimal numerals [0-9]. Variable identifiers may not
-override a reserved identifier.</p>
-<p>In addition to being assigned values within a program, all of the classical
-types can be initialized on declaration. Any classical variable or Boolean that is not explicitly
+<section id="identifiers">
+<span id="id1"></span><h2>Identifiers<a class="headerlink" href="#identifiers" title="Permalink to this headline">¶</a></h2>
+<p>Identifiers must begin with a letter [A-Za-z], an underscore or an element from
+the Unicode character categories Lu/Ll/Lt/Lm/Lo/Nl <span id="id2">[<a class="reference internal" href="../index.html#id51" title="Unicode Character Categories. URL: http://www.fileformat.info/info/unicode/category/index.htm (visited on 2020-10-23).">noa</a>]</span>.
+The set of permissible continuation characters consists of all members of the
+aforementioned character sets with the addition of decimal numerals [0-9].
+Identifiers may not override a reserved identifier.</p>
+</section>
+<section id="variables">
+<span id="id3"></span><h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Variables must be named according to the rules for identifiers (See <a class="reference internal" href="#identifiers"><span class="std std-ref">Identifiers</span></a>).
+Variables may be assigned values within a program. Variables representing any classical type
+can be initialized on declaration. Any classical variable or Boolean that is not explicitly
 initialized is undefined. Classical types can be mutually cast to one another using the typename.
 See <a class="reference internal" href="#castingspecifics"><span class="std std-ref">Casting specifics</span></a> for more details on casting.</p>
 <p>Declaration and initialization must be done one variable at a time for both quantum and classical
@@ -267,8 +271,8 @@ are all of type <code class="docutils literal notranslate"><span class="pre">flo
 </pre></div>
 </div>
 <div class="docutils container" id="tab-real-constants">
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">[tab:real-constants] Built-in real constants in OpenQASM3 of type <code class="docutils literal notranslate"><span class="pre">float[64]</span></code>.</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">[tab:real-constants] Built-in real constants in OpenQASM3 of type <code class="docutils literal notranslate"><span class="pre">float[64]</span></code>.</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 39%" />
 <col style="width: 18%" />
@@ -309,8 +313,8 @@ are all of type <code class="docutils literal notranslate"><span class="pre">flo
 OpenQASM 3 offers the following built-in mathematical operators followed by
 their argument expression in parentheses:</p>
 <div class="docutils container" id="tab-built-in-math">
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Built-in mathematical functions in OpenQASM3.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Built-in mathematical functions in OpenQASM3.</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col style="width: 8%" />
 <col style="width: 28%" />
@@ -935,7 +939,8 @@ dividing a duration by a duration produces a machine-precision <code class="docu
 <li class="toctree-l2"><a class="reference internal" href="comments.html#version-string">Version string</a></li>
 <li class="toctree-l2"><a class="reference internal" href="comments.html#included-files">Included files</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Types and Casting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#generalities">Generalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#identifiers">Identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quantum-types">Quantum types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classical-types">Classical types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#literals">Literals</a></li>
