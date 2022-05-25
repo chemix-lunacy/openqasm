@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "openspec"
+version = "0.1.0"
+description = ""
+authors = ["Someone"]
+packages = [
+    { include = "openqasm", from="source/openqasm" },
+	{ include = "openpulse", from="source/openpulse" }
+]
+license = "Proprietory"
+
+[tool.poetry.dependencies]
+# We're a 3.8 project, but certain dependencies require an upper bound.
+python = ">=3.8,<3.11"
+pytest="~6.0"
+pyyaml="*"
+pylint="~2.9"
+black="~20.8b0"
+Sphinx="~4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
